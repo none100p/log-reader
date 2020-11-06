@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "log-reader"
+    }
+  },
+  "defaultProject": "log-reader",
+  "cli": {
+    "analytics": false
+  }
 }
