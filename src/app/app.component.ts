@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {log} from '../assets/log';
 
 @Component({
@@ -10,15 +10,21 @@ export class AppComponent {
   title = 'log-reader';
   result: Map<string, number>;
   total = 0;
-  asd: string = 'sdjkfndsffg';
 
   constructor() {
     this.parse();
   }
 
   parse(): void {
-    this.asd = 1233;
-    const splitLog = log.split('\n');
+    // cleanup some unnecessary strings which can accidentally come into log
+    let cleanLog = log.replace('Linting "bi-box2"...\n', '');
+    cleanLog = cleanLog.replace('Linting "bi-box2-e2e"...\n', '');
+    cleanLog = cleanLog.replace('Lint warnings found in the listed files.\n', '');
+    cleanLog = cleanLog.replace(' Lint errors found in the listed files.\n', '');
+    cleanLog = cleanLog.replace('error Command failed with exit code 1.\n', '');
+    cleanLog = cleanLog.replace('info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\n', '');
+
+    const splitLog = cleanLog.split('\n');
     this.result = new Map();
     let splitLine;
 
@@ -30,6 +36,5 @@ export class AppComponent {
         this.total += current;
       }
     });
-    console.log(this.result);
   }
 }
