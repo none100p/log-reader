@@ -3,11 +3,14 @@
   <h4>Instructions</h4>
   <ul>
     <li>Run `yarn lint:es-stats`</li>
-    <li>Put a result from terminal to assets/log.ts file</li>
+    <li>Put a result from terminal to textarea</li>
     <li>Enjoy parsed errors =)</li>
   </ul>
 </div>
 <div>
+  <textarea style="min-height: 300px; width: 100%;" [(ngModel)]="log" (ngModelChange)="parse()" [ngModelOptions]="{debounce: 1000}"></textarea>
+</div>
+<div *ngIf="log">
   <table>
     <thead>
     <tr>
